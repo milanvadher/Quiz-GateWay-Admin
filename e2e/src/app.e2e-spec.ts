@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { Fuse2Page } from './app.po';
 
-describe('workspace-project App', () => {
-  let page: AppPage;
+describe('Fuse2 App', () => {
+    let page: Fuse2Page;
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+    beforeEach(() => {
+        page = new Fuse2Page();
+    });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to Quiz-GateWay-Admin!');
-  });
+    it('should display welcome message', () => {
+        page.navigateTo();
+        expect(page.getParagraphText()).toEqual('Welcome to Fuse2!');
+    });
 });
