@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { Router } from '@angular/router';
 
 @Component({
     selector   : 'login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _router: Router
     )
     {
         // Configure the layout
@@ -41,7 +43,7 @@ export class LoginComponent implements OnInit
                     hidden: true
                 }
             }
-        };
+        };        
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -53,9 +55,26 @@ export class LoginComponent implements OnInit
      */
     ngOnInit(): void
     {
+        // Login form
         this.loginForm = this._formBuilder.group({
             email   : ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
+            password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$')]]
         });
+    }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Admin login
+     */
+    login(): void
+    {
+        console.log(this.loginForm);
+        if (this.loginForm.valid) {
+            localStorage.setItem('user_info', JSON.stringify(this.loginForm.value));
+            this._router.navigateByUrl('/dashboard');
+        }
     }
 }

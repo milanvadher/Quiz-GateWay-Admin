@@ -9,11 +9,13 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { MatButtonModule, MatFormFieldModule, MatIconModule, MatMenuModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { DashboardService } from './dashboard.service';
+import { AuthGuard } from 'app/guard/auth.guard';
 
 const routes: Routes = [
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

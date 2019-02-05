@@ -53,6 +53,13 @@
             "timeEnd",
             "trace"
         ],
+        "brace-style": [
+            true,
+            "allman",
+            {
+                "allowSingleLine": true
+            }
+        ],
         "no-construct": true,
         "no-debugger": true,
         "no-duplicate-super": true,

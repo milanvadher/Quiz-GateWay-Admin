@@ -17,16 +17,12 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { DashboardModule } from './main/dashboard/dashboard.module';
+import { AuthGuard } from './guard/auth.guard';
 
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'auth',
-        pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        redirectTo: 'dashboard',
+        redirectTo: localStorage.getItem('user_info') ? 'auth' : 'dashboard',
         pathMatch: 'full'
     },
     {
@@ -35,7 +31,16 @@ const appRoutes: Routes = [
     },
     {
         path: 'user',
-        loadChildren: './main/user/user.module#UserModule'
+        loadChildren: './main/user/user.module#UserModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'errors',
+        loadChildren: './main/errors/errors.module#ErrorsModule',
+    },
+    {
+        path: '**',
+        redirectTo: 'errors/404'
     },
 ];
 
@@ -67,7 +72,7 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        DashboardModule
+        DashboardModule,
     ],
     bootstrap: [
         AppComponent

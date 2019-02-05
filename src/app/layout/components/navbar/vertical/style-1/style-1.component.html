@@ -7,13 +7,11 @@
 
     <div class="buttons">
 
-        <button mat-icon-button class="toggle-sidebar-folded"
-                (click)="toggleSidebarFolded()" fxHide.lt-lg>
+        <button mat-icon-button class="toggle-sidebar-folded" (click)="toggleSidebarFolded()" fxHide.lt-lg>
             <mat-icon class="secondary-text">menu</mat-icon>
         </button>
 
-        <button mat-icon-button class="toggle-sidebar-opened"
-                (click)="toggleSidebarOpened()" fxHide.gt-md>
+        <button mat-icon-button class="toggle-sidebar-opened" (click)="toggleSidebarOpened()" fxHide.gt-md>
             <mat-icon class="secondary-text">arrow_back</mat-icon>
         </button>
 
@@ -26,8 +24,8 @@
 
     <div class="user mat-indigo-700-bg" fxLayout="column">
 
-        <div class="h3 username">Charlie Adams</div>
-        <div class="h5 email hint-text mt-8">adams.charlie@mail.com</div>
+        <div class="h3 username">{{(_profile?.email).split('@')[0] | titlecase }}</div>
+        <div class="h5 email hint-text mt-8">{{_profile?.email}}</div>
         <div class="avatar-container" [ngClass]="fuseConfig.layout.navbar.background">
             <img class="avatar" src="assets/images/avatars/Velazquez.jpg">
         </div>
