@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'app/api.service';
 
 @Component({
@@ -11,8 +12,6 @@ export class ListComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
   private rowData: any[];
-  private rowGroupPanelShow = "always";
-  private rowSelection = "multiple"
 
   columnDefs = [
     {
@@ -22,57 +21,68 @@ export class ListComponent implements OnInit {
       checkboxSelection: true
     },
     {
-      headerName: "Mht Id",
-      field: "mht_id",
+      headerName: "Question Type",
+      field: "question_type",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Question",
+      field: "question",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Option A",
+      valueGetter: "data.options[0].option",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Option B",
+      valueGetter: "data.options[1].option",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Option C",
+      valueGetter: "data.options[2].option",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Option D",
+      valueGetter: "data.options[3].option",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Reference",
+      field: "reference",
+      filter: "agTextColumnFilter",
+    },
+    {
+      headerName: "Score",
+      field: "score",
       type: "numberColumn",
       filter: "agNumberColumnFilter"
     },
     {
-      headerName: "Name",
-      field: "name",
-      type: 'text',
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Mobile",
-      field: "mobile",
-      type: 'text',
-      filter: "agTextColumnFilter"
-    },
-    {
-      headerName: "Center",
-      field: "center",
-      type: 'text',
-      filter: "agTextColumnFilter",
-      enableRowGroup: true
-    },
-    {
-      headerName: "Total Score",
-      field: "totalscore",
+      headerName: "Question State",
+      field: "question_st",
       type: "numberColumn",
-      filter: "agNumberColumnFilter",
-      enableRowGroup: true
+      filter: "agNumberColumnFilter"
     },
     {
-      headerName: "Lives",
-      field: "lives",
-      type: "numberColumn",
-      filter: "agNumberColumnFilter",
-      enableRowGroup: true
-    },
-    {
-      headerName: "User Group",
-      field: "user_group",
-      type: 'text',
+      headerName: "Answer",
+      valueGetter: "data.answer[0].answer",
       filter: "agTextColumnFilter",
-      enableRowGroup: true
+    },
+    {
+      headerName: "QuizType",
+      field: "quiz_type",
+      filter: "agTextColumnFilter",
     }
   ];
 
   autoGroupColumnDef = {
     headerName: "Group",
     width: 200,
-    field: "mht_id",
+    field: "question_type",
     valueGetter: function (params) {
       if (params.node.group) {
         return params.node.key;
@@ -96,7 +106,7 @@ export class ListComponent implements OnInit {
   };
 
   defaultColGroupDef = { marryChildren: true };
-
+  
   columnTypes = {
     numberColumn: {
       width: 83,
@@ -119,9 +129,10 @@ export class ListComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
 
-    this.api.getUsers().subscribe((data: any) => {
-      console.log('Level Data :: ', data.data.users);
-      this.rowData = data.data.users;
+    this.api.getLevels().subscribe((data:any) => {
+      console.log('Level Data :: ', data);
+      this.rowData = data.data;
     });
   }
+
 }

@@ -17,6 +17,8 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { DashboardModule } from './main/dashboard/dashboard.module';
+import { UserModule } from './main/user/user.module';
+import { LevelModule } from './main/level/level.module';
 
 const appRoutes: Routes = [
     {
@@ -36,6 +38,10 @@ const appRoutes: Routes = [
     {
         path: 'user',
         loadChildren: './main/user/user.module#UserModule'
+    },
+    {
+        path: 'level',
+        loadChildren: './main/level/level.module#LevelModule'
     },
 ];
 
@@ -67,7 +73,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        DashboardModule
+        DashboardModule,
+        UserModule,
+        LevelModule
     ],
     bootstrap: [
         AppComponent
