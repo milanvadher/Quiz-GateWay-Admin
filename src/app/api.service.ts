@@ -20,7 +20,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   public getLevels(): Observable<any> {
-    return this.http.get(this.API_URL + '/admin/question?quiz_type=BONUS', this.httpOptions).pipe(map(this.extractData));
+    return this.http.get(this.API_URL + '/admin/question?question_type=MCQ', this.httpOptions).pipe(map(this.extractData));
   }
   
   public getUsers(): Observable<any> {

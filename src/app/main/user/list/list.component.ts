@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'app/api.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
@@ -12,7 +12,7 @@ import { fuseAnimations } from '@fuse/animations';
 export class ListComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['mht_id', 'name', 'center', 'mobile', 'totalscore', 'isactive'];
+  displayedColumns = ['index', 'mht_id', 'name', 'center', 'mobile', 'totalscore', 'isactive'];
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;

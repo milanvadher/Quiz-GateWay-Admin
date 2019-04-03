@@ -1,138 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'app/api.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  animations: fuseAnimations
 })
 export class ListComponent implements OnInit {
 
-  private gridApi;
-  private gridColumnApi;
-  private rowData: any[];
+  dataSource: MatTableDataSource<any> | null;
+  displayedColumns = ['index', 'question_id', 'level', 'question', 'options', 'reference', 'score', 'date'];
 
-  columnDefs = [
-    {
-      headerName: "No",
-      valueGetter: 'node.rowIndex',
-      headerCheckboxSelection: true,
-      checkboxSelection: true
-    },
-    {
-      headerName: "Question Type",
-      field: "question_type",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Question",
-      field: "question",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Option A",
-      valueGetter: "data.options[0].option",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Option B",
-      valueGetter: "data.options[1].option",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Option C",
-      valueGetter: "data.options[2].option",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Option D",
-      valueGetter: "data.options[3].option",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Reference",
-      field: "reference",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "Score",
-      field: "score",
-      type: "numberColumn",
-      filter: "agNumberColumnFilter"
-    },
-    {
-      headerName: "Question State",
-      field: "question_st",
-      type: "numberColumn",
-      filter: "agNumberColumnFilter"
-    },
-    {
-      headerName: "Answer",
-      valueGetter: "data.answer[0].answer",
-      filter: "agTextColumnFilter",
-    },
-    {
-      headerName: "QuizType",
-      field: "quiz_type",
-      filter: "agTextColumnFilter",
-    }
-  ];
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
 
-  autoGroupColumnDef = {
-    headerName: "Group",
-    width: 200,
-    field: "question_type",
-    valueGetter: function (params) {
-      if (params.node.group) {
-        return params.node.key;
-      } else {
-        return params.data[params.colDef.field];
-      }
-    },
-    headerCheckboxSelection: true,
-    cellRenderer: "agGroupCellRenderer",
-    cellRendererParams: { checkbox: true }
-  };
-
-  defaultColDef = {
-    editable: false,
-    enableRowGroup: true,
-    enablePivot: true,
-    enableValue: true,
-    sortable: true,
-    resizable: true,
-    filter: true
-  };
-
-  defaultColGroupDef = { marryChildren: true };
-  
-  columnTypes = {
-    numberColumn: {
-      width: 83,
-      filter: "agNumberColumnFilter"
-    },
-    medalColumn: {
-      width: 100,
-      columnGroupShow: "open",
-      filter: false
-    },
-    nonEditableColumn: { editable: false }
-  };
+  @ViewChild(MatSort)
+  sort: MatSort;
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.getLevelData();
   }
 
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-
-    this.api.getLevels().subscribe((data:any) => {
-      console.log('Level Data :: ', data);
-      this.rowData = data.data;
+  getLevelData() {
+    this.api.getLevels().subscribe(data => {
+      console.log('Levels ::: ** ::: ', data.data);
+      this.dataSource = new MatTableDataSource(data.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

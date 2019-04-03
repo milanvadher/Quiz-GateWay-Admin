@@ -47,6 +47,14 @@
       <mat-table class="users-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
         fusePerfectScrollbar>
 
+        <!-- INDEX Column -->
+        <ng-container matColumnDef="index">
+          <mat-header-cell *matHeaderCellDef>No</mat-header-cell>
+          <mat-cell *matCellDef="let user; let i = index;">
+            <p class="text-truncate">{{i+1}}</p>
+          </mat-cell>
+        </ng-container>
+
         <!-- ID Column -->
         <ng-container matColumnDef="mht_id">
           <mat-header-cell *matHeaderCellDef mat-sort-header>MHT ID</mat-header-cell>
@@ -109,13 +117,13 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
-        <mat-row *matRowDef="let product; columns: displayedColumns;" class="users" matRipple
-          [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle">
+        <mat-row *matRowDef="let user; columns: displayedColumns; let i = index" class="users" matRipple
+          [routerLink]="'/users/edit/'+user.mht_id">
         </mat-row>
 
       </mat-table>
 
-      <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+      <mat-paginator #paginator [pageIndex]="0" [pageSize]="15" [pageSizeOptions]="[5, 10, 15, 25, 100]">
       </mat-paginator>
 
     </div>
