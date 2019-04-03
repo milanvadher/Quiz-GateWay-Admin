@@ -1,21 +1,7 @@
-<!-- SIDE PANEL -->
-<ng-container *ngIf="!fuseConfig.layout.sidepanel.hidden && fuseConfig.layout.sidepanel.position === 'left'">
-
-    <!-- CHAT PANEL -->
-    <fuse-sidebar name="chatPanel" position="left" class="chat-panel left-chat-panel"
-                  [folded]="true" [foldedWidth]="70" [foldedAutoTriggerOnHover]="false"
-                  lockedOpen="gt-md">
-        <chat-panel></chat-panel>
-    </fuse-sidebar>
-    <!-- / CHAT PANEL -->
-
-</ng-container>
-<!-- / SIDE PANEL -->
-
 <div id="main">
 
     <!-- TOOLBAR: Above -->
-    <ng-container *ngIf="fuseConfig.layout.toolbar.position === 'above'">
+    <ng-container>
         <ng-container *ngTemplateOutlet="toolbar"></ng-container>
     </ng-container>
     <!-- / TOOLBAR: Above -->
@@ -25,12 +11,6 @@
         <ng-container *ngTemplateOutlet="topNavbar"></ng-container>
     </ng-container>
     <!-- / NAVBAR: Top -->
-
-    <!-- TOOLBAR: Below -->
-    <ng-container *ngIf="fuseConfig.layout.toolbar.position === 'below'">
-        <ng-container *ngTemplateOutlet="toolbar"></ng-container>
-    </ng-container>
-    <!-- / TOOLBAR: Below -->
 
     <div id="container-1" class="container">
 
@@ -69,19 +49,6 @@
 
 </div>
 
-<!-- SIDE PANEL -->
-<ng-container *ngIf="!fuseConfig.layout.sidepanel.hidden && fuseConfig.layout.sidepanel.position === 'right'">
-
-    <!-- CHAT PANEL -->
-    <fuse-sidebar name="chatPanel" position="right" class="chat-panel right-chat-panel"
-                  [folded]="true" [foldedWidth]="70" [foldedAutoTriggerOnHover]="false"
-                  lockedOpen="gt-md">
-        <chat-panel></chat-panel>
-    </fuse-sidebar>
-    <!-- / CHAT PANEL -->
-
-</ng-container>
-<!-- / SIDE PANEL -->
 
 <!-- QUICK PANEL -->
 <fuse-sidebar name="quickPanel" position="right" class="quick-panel">
