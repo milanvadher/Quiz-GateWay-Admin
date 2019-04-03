@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ListModule } from './list/list.module';
+import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { CreateComponent } from './dialog/create/create.component';
 
 const appRoutes: Routes = [
   {
@@ -12,13 +15,31 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
+  declarations: [
+    CreateComponent
+  ],
   imports: [
     CommonModule,
-    
+
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatToolbarModule,
+
     RouterModule.forChild(appRoutes),
+
+    FuseSharedModule,
 
     ListModule
   ],
-  declarations: []
+  entryComponents: [
+    CreateComponent
+  ]
 })
 export class LevelModule { }

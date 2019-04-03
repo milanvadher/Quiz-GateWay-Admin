@@ -33,7 +33,7 @@
       </div>
       <!-- / SEARCH -->
 
-      <button mat-raised-button [routerLink]="'/apps/e-commerce/products/new'"
+      <button mat-raised-button (click)="editQuestionDialog()"
         class="add-product-button mat-white-bg my-12 mt-sm-0">
         <span>ADD NEW LEVEL</span>
       </button>
@@ -134,7 +134,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
         <mat-row *matRowDef="let question; columns: displayedColumns; let i = index" class="levels" matRipple
-          [routerLink]="'/level/edit/'+question.question_id">
+        (click)="editQuestionDialog(question)">
         </mat-row>
 
       </mat-table>

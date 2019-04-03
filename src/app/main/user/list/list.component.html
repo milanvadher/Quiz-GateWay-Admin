@@ -33,7 +33,7 @@
       </div>
       <!-- / SEARCH -->
 
-      <button mat-raised-button [routerLink]="'/apps/e-commerce/products/new'"
+      <button mat-raised-button (click)="editUserDialog()"
         class="add-product-button mat-white-bg my-12 mt-sm-0">
         <span>ADD NEW USER</span>
       </button>
@@ -118,7 +118,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
         <mat-row *matRowDef="let user; columns: displayedColumns; let i = index" class="users" matRipple
-          [routerLink]="'/users/edit/'+user.mht_id">
+          (click)="editUserDialog(user)">
         </mat-row>
 
       </mat-table>
