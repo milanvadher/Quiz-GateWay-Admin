@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent m-0">
         <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Edit User</span>
+            <span class="title dialog-title">{{_data[0] | titlecase }} User</span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
@@ -10,52 +10,115 @@
 
     <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
-        <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+        <form class="compose-form" fxLayout="column" fxFlex [formGroup]="form">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Mht ID</mat-label>
-                <input matInput name="mht_id" placeholder="Mht ID" type="number" formControlName="mht_id">
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
-                <input matInput name="name" placeholder="Name" type="text" formControlName="name">
-            </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Mht ID</mat-label>
+                    <input matInput name="mht_id" placeholder="Mht ID" type="number" formControlName="mht_id" required>
+                    <mat-error *ngIf="formErrors.mht_id.errors && formErrors.mht_id.errors.required">
+                        Mht ID is required!
+                    </mat-error>
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Mobile</mat-label>
-                <input matInput name="mobile" placeholder="Mobile" type="text" formControlName="mobile">
-            </mat-form-field>
+            </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput name="email" placeholder="Email" type="email" formControlName="email">
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Totalscore</mat-label>
-                <input matInput name="totalscore" placeholder="Totalscore" formControlName="totalscore">
-            </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="name" required>
+                    <mat-error *ngIf="formErrors.name.errors && formErrors.name.errors.required">
+                        Name is required!
+                    </mat-error>
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>User Group</mat-label>
-                <input matInput name="user_group" placeholder="User Group" formControlName="user_group">
-            </mat-form-field>
+            </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Lives</mat-label>
-                <input matInput name="lives" placeholder="Lives" formControlName="lives">
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email" required>
+                    <mat-error *ngIf="formErrors.email.errors && formErrors.email.errors.email">
+                        Enter valid email!
+                    </mat-error>
+                    <mat-error *ngIf="formErrors.email.errors && formErrors.email.errors.required">
+                        Email is required!
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                <mat-form-field appearance="outline" fxFlex="50" class="mr-20">
+                    <mat-label>Mobile</mat-label>
+                    <input matInput placeholder="Mobile" formControlName="mobile" required>
+                    <mat-error *ngIf="formErrors.mobile.errors && formErrors.mobile.errors.required">
+                        Mobile is required!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Lives</mat-label>
+                    <mat-select placeholder="Lives" formControlName="lives" required>
+                        <mat-option [value]="1">
+                            1
+                        </mat-option>
+                        <mat-option [value]="2">
+                            2
+                        </mat-option>
+                        <mat-option [value]="3">
+                            3
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.user_group.errors && formErrors.user_group.errors.required">
+                        Lives is required!
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                <mat-form-field appearance="outline" fxFlex="50" class="mr-20">
+                    <mat-label>Totalscore</mat-label>
+                    <input matInput placeholder="Totalscore" formControlName="totalscore" required>
+                    <mat-error *ngIf="formErrors.totalscore.errors && formErrors.totalscore.errors.required">
+                        Totalscore is required!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>User Group</mat-label>
+                    <mat-select placeholder="Country" formControlName="user_group" required>
+                        <mat-option [value]="'MBA'">
+                            MBA
+                        </mat-option>
+                        <mat-option [value]="'SANKUL'">
+                            SANKUL
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.user_group.errors && formErrors.user_group.errors.required">
+                        User Group is required!
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
 
         </form>
+
     </div>
 
     <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
         <div>
-            <button mat-raised-button (click)="matDialogRef.close(['send',composeForm])" class="save-button mat-accent"
-                [disabled]="composeForm.invalid" aria-label="SAVE">
+            <button mat-raised-button (click)="matDialogRef.close(['send',form])" class="save-button mat-accent"
+                [disabled]="form.invalid" aria-label="SAVE">
                 SAVE
             </button>
         </div>
     </div>
+
 </div>

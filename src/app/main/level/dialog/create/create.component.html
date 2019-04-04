@@ -1,112 +1,101 @@
 <div class="dialog-content-wrapper">
-  <mat-toolbar class="mat-accent m-0">
-      <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-          <span class="title dialog-title">New Message</span>
-          <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
-              <mat-icon>close</mat-icon>
-          </button>
-      </mat-toolbar-row>
-  </mat-toolbar>
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{_data[0] | titlecase}} Level</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
-  <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
-      <form name="composeForm" [formGroup]="composeForm" class="compose-form" fxLayout="column" fxFlex>
+        <form class="compose-form" fxLayout="column" fxFlex [formGroup]="form">
 
-          <mat-form-field>
-              <input matInput name="from"
-                     placeholder="From"
-                     formControlName="from"
-                     type="email">
-          </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-          <mat-form-field>
-              <input matInput name="to"
-                     placeholder="To"
-                     formControlName="to"
-                     type="email" required>
-          </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Question Id</mat-label>
+                    <input matInput name="question_id" placeholder="Question Id" type="number"
+                        formControlName="question_id" required>
+                    <mat-error *ngIf="formErrors.question_id.errors && formErrors.question_id.errors.required">
+                        Question Id is required!
+                    </mat-error>
+                </mat-form-field>
 
-          <div class="show-hide-extra-fields" (click)="toggleExtraToFields()">
-              <span [fxShow]="!showExtraToFields">Show CC & BCC</span>
-              <span [fxShow]="showExtraToFields">Hide CC & BCC</span>
-          </div>
+            </div>
 
-          <mat-form-field [fxShow]="showExtraToFields">
-              <input matInput
-                     name="cc"
-                     placeholder="Cc"
-                     formControlName="cc"
-                     type="email">
-          </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-          <mat-form-field [fxShow]="showExtraToFields">
-              <input matInput
-                     name="bcc"
-                     placeholder="Bcc"
-                     formControlName="bcc"
-                     type="email">
-          </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Level</mat-label>
+                    <input matInput placeholder="Level" formControlName="level" required>
+                    <mat-error *ngIf="formErrors.level.errors && formErrors.level.errors.required">
+                        Level is required!
+                    </mat-error>
+                </mat-form-field>
 
-          <mat-form-field>
-              <input matInput name="subject"
-                     placeholder="Subject"
-                     formControlName="subject">
-          </mat-form-field>
+            </div>
 
-          <mat-form-field>
-              <textarea matInput name="message"
-                        placeholder="Message"
-                        formControlName="message"
-                        rows="6">
-              </textarea>
-          </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-          <div class="attachment-list">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Question</mat-label>
+                    <input matInput placeholder="Question" formControlName="question" required>
+                    <mat-error *ngIf="formErrors.question.errors && formErrors.question.errors.required">
+                        Question is required!
+                    </mat-error>
+                </mat-form-field>
 
-              <div class="attachment" fxLayout="row" fxLayoutAlign="space-between center">
-                  <div>
-                      <span class="filename">attachment-2.doc</span>
-                      <span class="size">(12 Kb)</span>
-                  </div>
+            </div>
 
-                  <button mat-icon-button aria-label="Delete attachment">
-                      <mat-icon class="s-16">close</mat-icon>
-                  </button>
-              </div>
+            <p class="p-12">Options :</p>
 
-              <div class="attachment" fxLayout="row" fxLayoutAlign="space-between center">
-                  <div>
-                      <span class="filename">attachment-1.jpg</span>
-                      <span class="size">(350 Kb)</span>
-                  </div>
+            <div formArrayName="options">
 
-                  <button mat-icon-button aria-label="Delete attachment">
-                      <mat-icon class="s-16">close</mat-icon>
-                  </button>
-              </div>
-          </div>
-      </form>
-  </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto"
+                    *ngFor="let item of optionsArray.controls; let i = index;" [formGroupName]="i">
 
-  <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-          <button mat-raised-button
-                  (click)="matDialogRef.close(['send',composeForm])"
-                  class="save-button mat-accent"
-                  [disabled]="composeForm.invalid"
-                  aria-label="SAVE">
-              SEND
-          </button>
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Option {{i +1}}</mat-label>
+                        <input matInput placeholder="Option {{i}}" formControlName="option" required>
+                    </mat-form-field>
 
-          <button mat-icon-button matTooltip="Attach a file">
-              <mat-icon>attach_file</mat-icon>
-          </button>
-      </div>
+                </div>
 
-      <button mat-icon-button (click)="matDialogRef.close(['delete',composeForm])"
-              aria-label="Delete"
-              matTooltip="Delete">
-          <mat-icon>delete</mat-icon>
-      </button>
-  </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                <mat-form-field appearance="outline" fxFlex="50" class="mr-20">
+                    <mat-label>Score</mat-label>
+                    <input matInput placeholder="Score" formControlName="score" required>
+                    <mat-error *ngIf="formErrors.score.errors && formErrors.score.errors.required">
+                        Score is required!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Date</mat-label>
+                    <input matInput placeholder="Date" type="date" formControlName="date" required>
+                    <mat-error *ngIf="formErrors.date.errors && formErrors.date.errors.required">
+                        Date is required!
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            <button mat-raised-button (click)="matDialogRef.close(['send',form])" class="save-button mat-accent"
+                [disabled]="form.invalid" aria-label="SAVE">
+                SAVE
+            </button>
+        </div>
+    </div>
+
 </div>

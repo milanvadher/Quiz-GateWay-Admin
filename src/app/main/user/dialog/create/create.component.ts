@@ -1,5 +1,5 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -8,60 +8,52 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
     styleUrls: ['./create.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class CreateComponent {
+export class CreateComponent implements OnInit {
 
-    showExtraToFields: boolean;
-    composeForm: FormGroup;
+    form: FormGroup;
 
     /**
      * Constructor
      *
      * @param {MatDialogRef<CreateComponent>} matDialogRef
      * @param _data
+     * @param {FormBuilder} _formBuilder
      */
     constructor(
         public matDialogRef: MatDialogRef<CreateComponent>,
-        @Inject(MAT_DIALOG_DATA) private _data: any
+        @Inject(MAT_DIALOG_DATA) public _data: any,
+        private _formBuilder: FormBuilder
     ) {
-        // Set the defaults
-        this.composeForm = this.createComposeForm();
-        this.showExtraToFields = false;
-        console.log('Data :: ', _data);
+    }
 
-        if (_data[0] == 'edit') {
-            this.composeForm.patchValue(_data[1]);
+    /**
+     * On Init
+     */
+    ngOnInit() {
+        // User Form
+        this.form = this._formBuilder.group({
+            mht_id      : ['', Validators.required],
+            name        : ['', Validators.required],
+            mobile      : ['', Validators.required],
+            email       : ['', [Validators.required, Validators.email]],
+            totalscore  : ['', Validators.required],
+            user_group  : ['', Validators.required],
+            lives       : ['', Validators.required],
+        });
+
+        console.log('Data :: ', this._data);
+
+        // Edit mode
+        if (this._data[0] == 'edit') {
+            this.form.patchValue(this._data[1]);
         }
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
     /**
-     * Create compose form
-     *
-     * @returns {FormGroup}
+     * @returns form controls 
      */
-    createComposeForm(): FormGroup {
-        return new FormGroup({
-            mht_id: new FormControl({
-                value: '',
-                disabled: true
-            }),
-            name: new FormControl(''),
-            mobile: new FormControl(''),
-            email: new FormControl(''),
-            totalscore: new FormControl(''),
-            user_group: new FormControl(''),
-            lives: new FormControl('')
-        });
-    }
-
-    /**
-     * Toggle extra to fields
-     */
-    toggleExtraToFields(): void {
-        this.showExtraToFields = !this.showExtraToFields;
+    get formErrors() {
+        return this.form.controls;
     }
 
 }
