@@ -73,8 +73,8 @@
 
         <!-- Center Column -->
         <ng-container matColumnDef="center">
-          <mat-header-cell *matHeaderCellDef fxHide mat-sort-header fxShow.gt-md>Center</mat-header-cell>
-          <mat-cell *matCellDef="let user" fxHide fxShow.gt-md>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Center</mat-header-cell>
+          <mat-cell *matCellDef="let user">
             <p class="category text-truncate">
               {{user.center}}
             </p>
@@ -83,8 +83,8 @@
 
         <!-- Mobile Column -->
         <ng-container matColumnDef="mobile">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Mobile</mat-header-cell>
-          <mat-cell *matCellDef="let user" fxHide fxShow.gt-xs>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
+          <mat-cell *matCellDef="let user">
             <p class="price text-truncate">
               {{user.mobile}}
             </p>
@@ -93,8 +93,8 @@
 
         <!-- Totalscore Column -->
         <ng-container matColumnDef="totalscore">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Totalscore</mat-header-cell>
-          <mat-cell *matCellDef="let user" fxHide fxShow.gt-sm>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Totalscore</mat-header-cell>
+          <mat-cell *matCellDef="let user">
 
             <span class="quantity-indicator text-truncate"
               [ngClass]="{'mat-red-500-bg':user.totalscore <= 500, 'mat-amber-500-bg':user.totalscore > 500 && user.totalscore <= 1500,'mat-green-600-bg':user.totalscore > 1500}">
@@ -108,8 +108,8 @@
 
         <!-- Active Column -->
         <ng-container matColumnDef="isactive">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Active</mat-header-cell>
-          <mat-cell *matCellDef="let user" fxHide fxShow.gt-xs>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Active</mat-header-cell>
+          <mat-cell *matCellDef="let user">
             <mat-icon *ngIf="user.isactive" class="active-icon mat-green-600-bg s-16">check</mat-icon>
             <mat-icon *ngIf="!user.isactive" class="active-icon mat-red-500-bg s-16">close</mat-icon>
           </mat-cell>

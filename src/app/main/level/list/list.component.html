@@ -75,7 +75,7 @@
         <ng-container matColumnDef="question">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Question</mat-header-cell>
           <mat-cell *matCellDef="let question">
-            <p class="text-truncate">{{question.question}}</p>
+            <p class="">{{question.question}}</p>
           </mat-cell>
         </ng-container>
 
@@ -88,7 +88,7 @@
                 <span class="quantity-indicator text-truncate mat-red-500-bg"
                   [ngClass]="{'mat-green-600-bg':question.answer[0].answer == option.option}">
                 </span>
-                <b> {{option.option_number}} :</b> 
+                <b> {{option.option_number}} : </b> 
                 <span [ngClass]="{'text-bold':question.answer[0].answer == option.option}">{{option.option}}</span>
                 <br>
               </span>

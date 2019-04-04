@@ -3,14 +3,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-create',
+    templateUrl: './create.component.html',
+    styleUrls: ['./create.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class CreateComponent {
 
-  showExtraToFields: boolean;
+    showExtraToFields: boolean;
     composeForm: FormGroup;
 
     /**
@@ -22,11 +22,15 @@ export class CreateComponent {
     constructor(
         public matDialogRef: MatDialogRef<CreateComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any
-    )
-    {
+    ) {
         // Set the defaults
         this.composeForm = this.createComposeForm();
         this.showExtraToFields = false;
+        console.log('Data :: ', _data);
+
+        if (_data[0] == 'edit') {
+            this.composeForm.patchValue(_data[1]);
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -38,26 +42,25 @@ export class CreateComponent {
      *
      * @returns {FormGroup}
      */
-    createComposeForm(): FormGroup
-    {
+    createComposeForm(): FormGroup {
         return new FormGroup({
-            from   : new FormControl({
-                value   : 'johndoe@creapond.com',
+            mht_id: new FormControl({
+                value: '',
                 disabled: true
             }),
-            to     : new FormControl(''),
-            cc     : new FormControl(''),
-            bcc    : new FormControl(''),
-            subject: new FormControl(''),
-            message: new FormControl('')
+            name: new FormControl(''),
+            mobile: new FormControl(''),
+            email: new FormControl(''),
+            totalscore: new FormControl(''),
+            user_group: new FormControl(''),
+            lives: new FormControl('')
         });
     }
 
     /**
      * Toggle extra to fields
      */
-    toggleExtraToFields(): void
-    {
+    toggleExtraToFields(): void {
         this.showExtraToFields = !this.showExtraToFields;
     }
 

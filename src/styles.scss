@@ -26,3 +26,8 @@ $yellow-theme: mat-light-theme($yellow-theme-primary, $yellow-theme-accent, $yel
     // Generate the fuse color classes with the new colors...
     @include generateFuseColorClasses($yellow-theme-primary, $yellow-theme-accent, $yellow-theme-warn);
 }
+
+.mat-paginator-container {
+    height: 52px;
+    background-color: #ECECEE !important;
+}

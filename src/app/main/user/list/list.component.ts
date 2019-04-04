@@ -50,7 +50,8 @@ export class ListComponent implements OnInit {
   editUserDialog(user) {
     console.log('USER :: ', user);
     this.dialogRef = this._matDialog.open(CreateComponent, {
-      panelClass: 'mail-compose-dialog'
+      panelClass: 'mail-compose-dialog',
+      data: user != undefined ? ['edit', user] : ['create']
     });
     this.dialogRef.afterClosed()
       .subscribe(response => {

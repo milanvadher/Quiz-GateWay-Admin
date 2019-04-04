@@ -68,6 +68,14 @@
             flex: 0 1 80px;
         }
 
+        .mat-column-index, .mat-column-question_id, .mat-column-level, .mat-column-score, {
+            flex: 0 1 100px;
+        }
+
+        .mat-column-question, .mat-column-options, .mat-column-reference {
+            flex: 0 1 250px;
+        }
+
         .quantity-indicator {
             display: inline-block;
             vertical-align: middle;

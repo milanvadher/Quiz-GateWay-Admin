@@ -68,6 +68,22 @@
             flex: 0 1 80px;
         }
 
+        .mat-column-index, .mat-column-mht_id, .mat-column-totalscore, .mat-column-isactive {
+            flex: 0 1 100px;
+        }
+
+        .mat-column-mobile {
+            flex: 0 1 150px;
+        }
+
+        // .mat-column-center {
+        //     flex: 0 1 170px;
+        // }
+
+        // .mat-column-name {
+        //     flex: 0 1 200px;
+        // }
+
         .quantity-indicator {
             display: inline-block;
             vertical-align: middle;
