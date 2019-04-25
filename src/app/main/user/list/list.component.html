@@ -42,9 +42,9 @@
     <!-- / HEADER -->
 
     <!-- CONTENT CARD -->
-    <div class="content-card mat-white-bg">
+    <div class="content-card mat-white-bg" style="overflow: auto;">
 
-      <mat-table class="users-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+      <mat-table class="users-table" #table [dataSource]="dataSource" style="min-width: 1000px;" matSort [@animateStagger]="{value:'50'}"
         fusePerfectScrollbar>
 
         <!-- INDEX Column -->
