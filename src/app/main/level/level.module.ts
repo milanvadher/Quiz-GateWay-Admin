@@ -5,6 +5,8 @@ import { ListModule } from './list/list.module';
 import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule, MatRippleModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { CreateComponent } from './dialog/create/create.component';
+import { UploadComponent } from './dialog/uploadfile/upload.component';
+
 
 const appRoutes: Routes = [
   {
@@ -16,7 +18,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
     ListModule
   ],
   entryComponents: [
-    CreateComponent
+    CreateComponent,
+    UploadComponent
   ]
 })
 export class LevelModule { }

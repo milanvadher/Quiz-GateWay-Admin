@@ -33,13 +33,13 @@ export class CreateComponent implements OnInit {
     ngOnInit() {
         // User Form
         this.form = this._formBuilder.group({
-            question_id : ['', Validators.required],
-            level       : ['', Validators.required],
-            question    : ['', Validators.required],
-            options     : this._formBuilder.array([]),
-            reference   : ['', Validators.required],
-            score       : ['', Validators.required],
-            date        : ['', Validators.required],
+            question_id: ['', Validators.required],
+            level: ['', Validators.required],
+            question: ['', Validators.required],
+            options: this._formBuilder.array([]),
+            reference: ['', Validators.required],
+            score: ['', Validators.required],
+            date: ['', Validators.required],
         });
 
         console.log('Data :: ', this._data);
@@ -52,7 +52,7 @@ export class CreateComponent implements OnInit {
             });
         } else {
             for (let i = 0; i < 4; i++) {
-                this.addOption();                
+                this.addOption();
             }
         }
     }
@@ -73,8 +73,8 @@ export class CreateComponent implements OnInit {
      */
     addOption(data?: { option_number: number; option: string; }) {
         const optionGroup = this._formBuilder.group({
-            option_number   : [ data ? data.option_number : this.optionsArray.length + 1, Validators.required ],
-            option          : [ data ? data.option        : '', Validators.required ]
+            option_number: [data ? data.option_number : this.optionsArray.length + 1, Validators.required],
+            option: [data ? data.option : '', Validators.required]
         });
 
         this.optionsArray.push(optionGroup);

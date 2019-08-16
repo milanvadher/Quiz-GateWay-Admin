@@ -1,0 +1,31 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent m-0">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{ title_File | titlecase}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+
+        <form class="compose-form" fxLayout="column" fxFlex [formGroup]="form">
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                <input type="file" value="{{question}}" placeholder="Upload file" accept=".xlsx,.csv"
+                    (change)="incomingfile($event)">
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            <button mat-raised-button (click)="matDialogRef.close(['upload',form])" class="save-button mat-accent"
+                aria-label="SAVE">
+                SAVE
+            </button>
+        </div>
+    </div>
+
+</div>

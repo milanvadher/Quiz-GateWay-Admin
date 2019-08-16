@@ -27,6 +27,12 @@ export class ApiService {
     return this.http.get(this.API_URL + '/users', this.httpOptions).pipe(map(this.extractData));
   }
 
+  public insertQuestions(data): Observable<any> {
+
+    return this.http.post(this.API_URL + '/admin/questions', data, this.httpOptions).pipe(map(this.extractData));
+    //return this.http.get(this.API_URL + '/users', this.httpOptions).pipe(map(this.extractData));
+  }
+
   private extractData(res: Response) {
     let body = res;
     return body || {};
